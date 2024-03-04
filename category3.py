@@ -34,11 +34,11 @@ sensor_daily = merged_spu_to_sku_on_ads_data(sensor_daily,spu_index,'SKU', 'SPU'
 with st.sidebar:
     selected_range = out_date_range_data(ads_daily_df,'Date',"自选日期范围")
     compare_selected_range = out_date_range_data(ads_daily_df,'Date',"对比数据日期范围")
-    start_date = pd.to_datetime(selected_range[0])
-    end_date = pd.to_datetime(selected_range[1])
+    start_date = pd.to_datetime(compare_selected_range[0])
+    end_date = pd.to_datetime(compare_selected_range[1])
     compare_end_date = (start_date - pd.Timedelta(days=1)).strftime('%Y/%m/%d')
     compare_start_date = (start_date - pd.Timedelta(days=1) - pd.Timedelta(end_date - start_date)).strftime('%Y/%m/%d')
-    st.subheader(f"提示：当前自选日期的上个环比周期为{compare_start_date}—{compare_end_date}")
+    st.subheader(f"提示：当前对比日期的上个环比周期为{compare_start_date}—{compare_end_date}")
 
 if and_tags or or_tags or exclude_tags:
  sensor_daily = create_sensor_campaign_filter_input_df(sensor_daily,and_tags, or_tags, exclude_tags, 'Campaign')
